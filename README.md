@@ -139,14 +139,15 @@ void setup() {
 
 # M5450 Universal Driver - Guida di Riferimento API (Italiano)
 
-Questo documento fornisce una guida di riferimento rapido per tutti i metodi pubblici disponibili nella libreria M5450 Universal Driver. È la documentazione utente per la libreria.
+Questo documento fornisce una guida di riferimento rapida per tutti i metodi pubblici disponibili nella libreria M5450 Universal Driver. 
+E' la documentazione utente per la libreria.
 
 ## Caratteristiche
 
 -   Interfaccia intuitiva con numerazione dei pin da 1 a 34, corrispondente alle etichette dei pin nel datasheet.
 -   Gestione della "variabile ombra": prepara le tue uscite e aggiornale tutte simultaneamente con `update()`.
 -   Modalita' ibrida intelligente che previene conflitti tra display e rele'.
--   Metodi di gruppo sicuri per gestire più rele' senza interferire con il display.
+-   Metodi di gruppo sicuri per gestire piu' rele' senza interferire con il display.
 -   Modalita' di debug integrata per visualizzare lo stato dei bit sul Serial Monitor dell'IDE Arduino.
 -   Codice efficiente e portabile, compatibile con architetture AVR (Arduino UNO, ESP32, ESP8266, ecc... ) 
 
@@ -187,14 +188,14 @@ L'API include:
 ### Inizializzazione della Libreria
 
 #### `M5450(dataPin, clockPin, strobePin, numDigits)`
-**Descrizione:** Costruttore della classe. Crea un'istanza del driver e ne imposta la modalità operativa.
+**Descrizione:** Costruttore della classe. Crea un'istanza del driver e ne imposta la modalita' operativa.
 -   `dataPin`  : `uint8_t`  - Pin di Arduino per DATA.
 -   `clockPin` : `uint8_t`  - Pin di Arduino per CLOCK.
 -   `strobePin`: `uint8_t`  - Pin di Arduino per STROBE.
--   `numDigits`: `uint8_t`  (opzionale) - Numero di display a 7 segmenti (1-4). Se omesso(numDigits=0), si abilita la modalità solo rele'.
+-   `numDigits`: `uint8_t`  (opzionale) - Numero di display a 7 segmenti (1-4). Se omesso(numDigits=0), si abilita la modalita' solo rele'.
 **Uso:**
-M5450 relays(2, 3, 4);          // Modalità da 1 a 34 rele'
-M5450 display(2, 3, 4, 4);      // Modalità display a 4 digit
+M5450 relays(2, 3, 4);          // Modalita' da 1 a 34 rele'
+M5450 display(2, 3, 4, 4);      // Modalita' display a 4 digit
 
 #### `void begin()`
 **Descrizione:** Inizializza la libreria e i pin hardware. Da chiamare una sola volta nel "setup()".
@@ -210,23 +211,23 @@ void setup() {
 Invia lo stato interno corrente (la "variabile ombra") al chip M5450. I cambiamenti preparati con `print()`, `setRelay()`, `setRelayGroup()` e `clearRelays()` diventano visibili e attivi solo dopo aver chiamato questo metodo.
 **Uso:**
 mioController.setRelay(15, true);
-mioController.update(); // Il relè 15 ora si accende
+mioController.update(); // Il rele' 15 ora si accende
 
 #### `void clear()`
 **Descrizione:** Spegne tutte le 34 uscite (sia rele' che segmenti del display) e aggiorna immediatamente il chip.
 **Uso:**
-mioController.clear(); resetta la variabile "ombra"
+mioController.clear(); resetta la "variabile ombra"
 
 ### Metodi per Display
 
 #### `void print(long number)`
-**Descrizione:** Prepara un numero intero per essere visualizzato sul display. Funziona solo se la libreria e' in modalità display o ibrida (`numDigits > 0`). Gestisce i numeri negativi mostrando un trattino.
+**Descrizione:** Prepara un numero intero per essere visualizzato sul display. Funziona solo se la libreria e' in modalita' display o ibrida (`numDigits > 0`). Gestisce i numeri negativi mostrando un trattino.
 -   `number`: `long` - L'intero da visualizzare.
 **Uso:**
 display.print(-123); 
 display.update();
 
-### Metodi per Relè e Uscite
+### Metodi per Rele' e Uscite
 
 #### `void setRelay(uint8_t relayNumber, bool state)`
 **Descrizione:** Prepara una singola uscita per essere accesa o spenta. Il comando viene ignorato se `relayNumber` e' riservato per il display.
@@ -252,14 +253,15 @@ relays.update();
 **Descrizione:** Prepara lo spegnimento di tutte le uscite disponibili come rele' senza influenzare il display.
 **Uso:**
 controllerIbrido.clearRelays();
-controllerIbrido.update(); // Il display resta acceso, i relè si spengono
+controllerIbrido.update(); // Il display resta acceso, i rele' si spengono
 
 #### `bool getOutputState(uint8_t pinNumber)`
-**Descrizione:** Restituisce lo stato memorizzato internamente (`true` o `false`) di una qualsiasi uscita.
+**Descrizione:** Restituisce lo stato memorizzato internamente (`true` o
+`false`) di una qualsiasi uscita.
 -   `pinNumber`: `uint8_t` - Il numero dell'uscita da controllare (da 1 a 34).
 **Restituisce:** `bool` - `true` se l'uscita e' impostata su ON nella variabile ombra, altrimenti `false`.
 **Uso:**
-bool relèAcceso = relays.getOutputState(20);
+bool releAcceso = relays.getOutputState(20);
 
 ### Debug
 
