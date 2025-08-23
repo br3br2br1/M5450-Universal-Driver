@@ -143,11 +143,11 @@ Questo documento fornisce una guida di riferimento rapido per tutti i metodi pub
 
 ## Caratteristiche
 
--   Interfaccia intuitiva con numerazione dei pin da 1 a 34, corrispondente alle etichette del datasheet.
--   Gestione dello stato "ombra": prepara le tue uscite e aggiornale tutte simultaneamente con `update()`.
--   Modalità ibrida intelligente che previene conflitti tra display e relè.
--   Metodi di gruppo sicuri per gestire più relè senza interferire con il display.
--   Modalità di debug integrata per visualizzare lo stato dei bit sul Serial Monitor dell'IDE Arduino.
+-   Interfaccia intuitiva con numerazione dei pin da 1 a 34, corrispondente alle etichette dei pin nel datasheet.
+-   Gestione della "variabile ombra": prepara le tue uscite e aggiornale tutte simultaneamente con `update()`.
+-   Modalita' ibrida intelligente che previene conflitti tra display e rele'.
+-   Metodi di gruppo sicuri per gestire più rele' senza interferire con il display.
+-   Modalita' di debug integrata per visualizzare lo stato dei bit sul Serial Monitor dell'IDE Arduino.
 -   Codice efficiente e portabile, compatibile con architetture AVR (Arduino UNO, ESP32, ESP8266, ecc... ) 
 
 ## Installazione
@@ -160,13 +160,13 @@ Questo documento fornisce una guida di riferimento rapido per tutti i metodi pub
 
 ## Collegamenti Hardware (Schema Logico)
 
-Quando usata in modalità display, la libreria assume il seguente schema di collegamento logico:
+Quando usata in modalita' display, la libreria assume il seguente schema di collegamento logico:
 -   **Digit 1:** Controllato dalle uscite **1-7** del M5450.
 -   **Digit 2:** Controllato dalle uscite **8-14** del M5450.
 -   **Digit 3:** Controllato dalle uscite **15-21** del M5450.
 -   **Digit 4:** Controllato dalle uscite **22-28** del M5450.
 
-Le uscite rimanenti (fino alla 34) sono disponibili per l'uso come relè.
+Le uscite rimanenti (fino alla 34) sono disponibili per l'uso come rele'.
 
 ---
 
@@ -191,13 +191,13 @@ L'API include:
 -   `dataPin`  : `uint8_t`  - Pin di Arduino per DATA.
 -   `clockPin` : `uint8_t`  - Pin di Arduino per CLOCK.
 -   `strobePin`: `uint8_t`  - Pin di Arduino per STROBE.
--   `numDigits`: `uint8_t`  (opzionale) - Numero di display a 7 segmenti (1-4). Se `0` o omesso, abilita la modalità solo relè.
+-   `numDigits`: `uint8_t`  (opzionale) - Numero di display a 7 segmenti (1-4). Se omesso(numDigits=0), si abilita la modalità solo rele'.
 **Uso:**
-M5450 relays(2, 3, 4);          // Modalità relè
+M5450 relays(2, 3, 4);          // Modalità da 1 a 34 rele'
 M5450 display(2, 3, 4, 4);      // Modalità display a 4 digit
 
 #### `void begin()`
-**Descrizione:** Inizializza la libreria e i pin hardware. Da chiamare una sola volta nel `setup()`.
+**Descrizione:** Inizializza la libreria e i pin hardware. Da chiamare una sola volta nel "setup()".
 **Uso:**
 void setup() {
   mioController.begin();
@@ -207,20 +207,20 @@ void setup() {
 
 #### `void update()`
 **Descrizione:** 
-Invia lo stato interno corrente (lo "stato ombra") al chip M5450. I cambiamenti preparati con `print()`, `setRelay()`, `setRelayGroup()` e `clearRelays()` diventano visibili e attivi solo dopo aver chiamato questo metodo.
+Invia lo stato interno corrente (la "variabile ombra") al chip M5450. I cambiamenti preparati con `print()`, `setRelay()`, `setRelayGroup()` e `clearRelays()` diventano visibili e attivi solo dopo aver chiamato questo metodo.
 **Uso:**
 mioController.setRelay(15, true);
 mioController.update(); // Il relè 15 ora si accende
 
 #### `void clear()`
-**Descrizione:** Spegne tutte le 34 uscite (sia relè che segmenti del display) e aggiorna immediatamente il chip.
+**Descrizione:** Spegne tutte le 34 uscite (sia rele' che segmenti del display) e aggiorna immediatamente il chip.
 **Uso:**
-mioController.clear();  resetta la variabile "ombra"
+mioController.clear(); resetta la variabile "ombra"
 
 ### Metodi per Display
 
 #### `void print(long number)`
-**Descrizione:** Prepara un numero intero per essere visualizzato sul display. Funziona solo se la libreria è in modalità display o ibrida (`numDigits > 0`). Gestisce i numeri negativi mostrando un trattino.
+**Descrizione:** Prepara un numero intero per essere visualizzato sul display. Funziona solo se la libreria e' in modalità display o ibrida (`numDigits > 0`). Gestisce i numeri negativi mostrando un trattino.
 -   `number`: `long` - L'intero da visualizzare.
 **Uso:**
 display.print(-123); 
@@ -229,11 +229,11 @@ display.update();
 ### Metodi per Relè e Uscite
 
 #### `void setRelay(uint8_t relayNumber, bool state)`
-**Descrizione:** Prepara una singola uscita per essere accesa o spenta. Il comando viene ignorato se `relayNumber` è riservato per il display.
+**Descrizione:** Prepara una singola uscita per essere accesa o spenta. Il comando viene ignorato se `relayNumber` e' riservato per il display.
 -   `relayNumber`: `uint8_t` - Il numero dell'uscita da controllare (da 1 a 34).
 -   `state`: `bool` - `true` per ON, `false` per OFF.
 **Uso:**
-// Prepara l'accensione del relè 16 e lo spegnimento del 17
+// Prepara l'accensione del rele' 16 e lo spegnimento del 17
 relays.setRelay(16, true);
 relays.setRelay(17, false);
 relays.update(); // Entrambi i cambiamenti avvengono ora
@@ -249,7 +249,7 @@ relays.setRelayGroup(mioGruppo, 3, true);
 relays.update();
 
 #### `void clearRelays()`
-**Descrizione:** Prepara lo spegnimento di tutte le uscite disponibili come relè senza influenzare il display.
+**Descrizione:** Prepara lo spegnimento di tutte le uscite disponibili come rele' senza influenzare il display.
 **Uso:**
 controllerIbrido.clearRelays();
 controllerIbrido.update(); // Il display resta acceso, i relè si spengono
@@ -257,7 +257,7 @@ controllerIbrido.update(); // Il display resta acceso, i relè si spengono
 #### `bool getOutputState(uint8_t pinNumber)`
 **Descrizione:** Restituisce lo stato memorizzato internamente (`true` o `false`) di una qualsiasi uscita.
 -   `pinNumber`: `uint8_t` - Il numero dell'uscita da controllare (da 1 a 34).
-**Restituisce:** `bool` - `true` se l'uscita è impostata su ON nello stato ombra, altrimenti `false`.
+**Restituisce:** `bool` - `true` se l'uscita e' impostata su ON nella variabile ombra, altrimenti `false`.
 **Uso:**
 bool relèAcceso = relays.getOutputState(20);
 
