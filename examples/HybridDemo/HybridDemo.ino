@@ -1,8 +1,8 @@
 /*
- * HybridDemo.ino - Esempio Definitivo della Libreria M5450
+ * HybridDemo.ino - Esempio ibrido della Libreria M5450
  *
- * Questo sketch dimostra l'uso della libreria in modalità ibrida
- * e testa la funzionalità di debug stampando lo stato dei bit sul Serial Monitor.
+ * Questo sketch dimostra l'uso della libreria in modalita' ibrida
+ * e testa la funzionalita' di debug, stampando lo stato dei bit sul Serial Monitor.
  *
  * This sketch demonstrates the use of the library in hybrid mode
  * and tests the debug functionality by printing the bit state to the Serial Monitor.
@@ -23,14 +23,14 @@ const uint8_t NUM_DIGITS = 2;
 
 // I pin 0-13 sono ora riservati per il display.
 // Pins 0-13 are now reserved for the display.
-// I pin 14-33 sono disponibili come relè.
+// I pin 14-33 sono disponibili come rele'.
 // Pins 14-33 are available as relays.
 
 M5450 m5450_controller(DATA_PIN, CLOCK_PIN, STROBE_PIN, NUM_DIGITS);
 //M5450 m5450_controller(DATA_PIN, CLOCK_PIN, STROBE_PIN);
 void setup() {
   Serial.begin(115200);
-  // scommenta per il debug monitor la riga dopo
+  // Scommenta la riga dopo, per il debug monitor sull'IDE Arduino /  Uncomment the line after, for debug monitor on IDE Arduino
   m5450_controller.enableDebug(true);
   // Attende che il monitor seriale sia pronto, utile per alcune schede
   // Waits for the serial monitor to be ready, useful for some boards
@@ -43,7 +43,7 @@ void setup() {
   // --- LET'S ENABLE DEBUG! ---
   m5450_controller.enableDebug(true);
 
-  // Inizializza la libreria. Questo chiamerà clear() e quindi update(),
+  // Inizializza la libreria. Questo chiamera' clear() e quindi update(),
   // vedremo la prima stampa di debug qui.
   // Initialize the library. This will call clear() and then update(),
   // so we will see the first debug print here.
@@ -54,7 +54,7 @@ void setup() {
   // --- TEST DEI METODI DI GRUPPO ---
   // --- GROUP METHODS TEST ---
   
-  Serial.println("\n--- Test 1: Impostare Display e Relè insieme ---");
+  Serial.println("\n--- Test 1: Impostare Display e Rele' insieme ---");
   Serial.println("Azione: print(12)");
   m5450_controller.print(12);
 
@@ -64,14 +64,14 @@ void setup() {
   Serial.println("Azione: setRelayGroup({16, 20, 30, 34}, ON)");
   m5450_controller.setRelayGroup(gruppoDaAccendere, dimensioneGruppo, true);
 
-  // Invia lo stato combinato: il display mostrerà '12' e i 4 relè si accenderanno
+  // Invia lo stato combinato: il display mostrera' '12' e i 4 rele' si accenderanno
   // Send the combined state: the display will show '12' and the 4 relays will turn on
   Serial.println("Azione: update()");
   m5450_controller.update();
   delay(3000);
 
   // --- TEST DI clearRelays ---
-  Serial.println("\n--- Test 2: Spegnere solo i relè ---");
+  Serial.println("\n--- Test 2: Spegnere solo i rele' ---");
   Serial.println("Azione: clearRelays()");
   m5450_controller.clearRelays();
   
@@ -81,7 +81,7 @@ void setup() {
   m5450_controller.update();
   delay(4000);
   
-  Serial.println("\nTest concluso. Il loop non eseguirà altre azioni.");
+  Serial.println("\nTest concluso. Il loop non eseguira' altre azioni.");
   Serial.println("Test finished. The loop will not perform other actions.");
 }
 
