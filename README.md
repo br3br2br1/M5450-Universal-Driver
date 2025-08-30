@@ -2,6 +2,11 @@
 
 https://www.alldatasheet.com/datasheet-pdf/pdf/99727/STMICROELECTRONICS/M5450.html
 
+This document provides a quick reference guide for all public methods available in the 
+M5450 Universal Driver library. This is the user documentation for the library.
+
+> **Author's Note:** Please read our [Ethical Standard](ETHICS.md) regarding the intended use of this software.
+
 
 # M5450 Universal Driver - API Reference
 
@@ -141,6 +146,11 @@ void setup() {
 ====================================================================================
 
 # M5450 Universal Driver - Guida di Riferimento API (Italiano)
+
+Questo documento fornisce una guida di riferimento rapido per tutti i metodi pubblici disponibili 
+nella libreria M5450 Universal Driver. È la documentazione utente per la libreria.
+
+> **Nota dell'Autore:** Si prega di leggere il nostro [Standard Etico](ETHICS.md) riguardo l'utilizzo previsto per questo software.
 
 Questo documento fornisce una guida di riferimento rapida per tutti i metodi pubblici disponibili nella libreria M5450 Universal Driver. 
 E' la documentazione utente per la libreria.
